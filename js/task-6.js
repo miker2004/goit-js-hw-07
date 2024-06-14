@@ -7,15 +7,13 @@ function getRandomHexColor() {
 const createBoxes = (amount) => {
   const boxesContainer = document.getElementById('boxes');
   boxesContainer.innerHTML = ''; 
-  
-  for (let i = 0; i < amount; i++) {
-    const box = document.createElement('div');
+
+  const boxesHtml = Array.from({ length: amount }, (_, i) => {
     const size = 30 + i * 10;
-    box.style.width = `${size}px`;
-    box.style.height = `${size}px`;
-    box.style.backgroundColor = getRandomHexColor();
-    boxesContainer.appendChild(box);
-  }
+    return `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()};"></div>`;
+  }).join('');
+
+  boxesContainer.innerHTML = boxesHtml;
 }
 
 const destroyBoxes = () => {

@@ -27,16 +27,27 @@ const images = [
 
 const gallery = document.querySelector("body > ul");
 
-images.forEach(image => {
-  const img = document.createElement('img');
-  img.src = image.url;
-  img.alt = image.alt;
-  img.classList.add('gallery-item');
-  gallery.appendChild(img);
-  img.style.display = "flex";
-  img.style.flexDirection = "column";
-  img.style.alignContent = "center";
-  img.style.maxWidth = "1280px"
-    img.style.margin = "0 auto"
-  img.style.gap = "3px"
-});
+const applyStyles = () => `
+  <style>
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      list-style-type: none;
+      padding: 0;
+    }
+    .gallery-item {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  </style>
+`;
+
+const generateImageHTML = images => images.map(image => `
+  <li>
+    <img src="${image.url}" alt="${image.alt}" class="gallery-item">
+  </li>
+`).join('');
+
+gallery.innerHTML = applyStyles() + generateImageHTML(images);
